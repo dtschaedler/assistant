@@ -200,7 +200,7 @@ def launcher(autorun):
 	else:
 		clear()
 		
-def create_updater(update):
+def create_updater():
 	clear()
 	print "Creating the Updater file..."
 	with open('assistupdate.sh', 'w') as file:
