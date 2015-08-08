@@ -41,7 +41,7 @@ def casual():
 				if (usr_in2 == 2) or (usr_in2 == "emulationstation"):
 					os.system('emulationstation')
 					
-			elif (usr_in == "3") or (usr_in == "manage programs") or ("manage programs"):
+			elif (usr_in == "3") or (usr_in == "manage programs"):
 				clear()
 				print "[1]Install Packages"
 				print "[2]Update Packages"
@@ -170,7 +170,7 @@ def make_config():
 
 def create_updater():
 	print "Building the Updater file..."
-		with open('assistupdate.sh', 'w') as file:
+	with open('assistupdate.sh', 'w') as file:
 		write1 = "#!/bin/sh\n# assistupdate.sh\n# Update the assistant.py file\nrm assistant.py\nwget https://raw.githubusercontent.com/dtschaedler/assistant/master/assistant.py"
 		update_data = ["hold"]
 		update_data[0] = write1
