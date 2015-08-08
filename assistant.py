@@ -206,6 +206,7 @@ def create_updater():
 	print "Creating the Updater file..."
 	with open('assistupdate.sh', 'w') as file:
 		write1 = "#!/bin/sh\n# assistupdate.sh\n# Update the assistant.py file\nrm assistant.py\nwget https://raw.githubusercontent.com/dtschaedler/assistant/master/assistant.py"
+		update_data = ["hold"]
 		update_data[0] = write1
 		file.writelines( update_data )
 	os.system('chmod 755 assistupdate.sh')
