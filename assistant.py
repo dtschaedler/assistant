@@ -24,6 +24,7 @@ def casual():
 			print "                   [4]Install Packages"
 			print "                   [5]Update Packages"
 			print "                   [7]Setup This Script"
+			print "                   [8]Update Me"
 			print ""
 			print "                   [0]Quit to Command Line"
 			print ""
@@ -78,6 +79,8 @@ def casual():
 						ins_retropie()
 					else:
 						clear()
+				elif (usr_in2 == "8") or (usr_in2 == "update me") or (usr_in2 == "update"):
+					update()
 				elif (usr_in2 == "9") or (usr_in2 == "all listed") or (usr_in2 == "all"):
 					akeep = 1
 					num = 0
@@ -195,6 +198,39 @@ def launcher(autorun):
 		clear()
 	else:
 		clear()
+		
+def create_updater():
+	clear()
+	print "Creating the Updater file..."
+	with open('assistupdate.sh', 'w') as file:
+		write1 = "#!/bin/sh\n# assistupdate.sh\n# Update the assistant.py file\nrm assistant.py\nwget https://github.com/dtschaedler/assistant/blob/master/assistant.py"
+		update_data[0] = write1
+		file.writelines( update_data )
+	os.system('chmod 755 assistupdate.sh')
+	os.system('cd')
+	print "Updater FIle Generated"
+	cont()
+	clear()
+
+def update()
+	clear()
+	print "Finding update script..."
+	update_exists = os.path.isfile('assistupdate.sh')
+	if update_exists == False:
+		print "No Update File Found."
+		time.sleep 2
+		create_updater():
+	else:
+		clear()
+	print "Double checking..."
+	if update_exists == False:
+		print "Could not find the script. Update will most likely fail."
+		time.sleep 2
+	print "Running updater"
+	os.system('./assistupdate.sh')
+	print "Update FInished"
+	cont()
+	clear()
 			
 def cont():
 	hold = raw_input("Press Enter")
@@ -204,6 +240,7 @@ def clear():
 
 if cfg_exists == False:
 	make_config()
+	create_updater()
 	config()
 
 	
