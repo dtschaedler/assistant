@@ -218,14 +218,14 @@ def update():
 	update_exists = os.path.isfile('assistupdate.sh')
 	if update_exists == False:
 		print "No Update File Found."
-		time.sleep 2
+		time.sleep(2)
 		create_updater():
 	else:
 		clear()
 	print "Double checking..."
 	if update_exists == False:
 		print "Could not find the script. Update will most likely fail."
-		time.sleep 2
+		time.sleep(2)
 	print "Running updater"
 	os.system('./assistupdate.sh')
 	print "Update FInished"
