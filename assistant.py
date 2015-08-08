@@ -112,7 +112,7 @@ def casual():
 				with open('config.txt', 'r') as file:
 					config_data = file.readlines()
 			
-			elif (usr_in2 == "8") or (usr_in2 == "update me") or (usr_in2 == "update"):
+			if (usr_in == "8") or (usr_in == "update me") or (usr_in == "update"):
 				update()
 			#Quit
 			if (usr_in == "0") or (usr_in == "quit"):
