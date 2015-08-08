@@ -41,7 +41,7 @@ def casual():
 				if (usr_in2 == 2) or (usr_in2 == "emulationstation"):
 					os.system('emulationstation')
 					
-			elif (usr_in == "3") or (usr_in == "manage programs") or (manage programs):
+			elif (usr_in == "3") or (usr_in == "manage programs") or ("manage programs"):
 				clear()
 				print "[1]Install Packages"
 				print "[2]Update Packages"
