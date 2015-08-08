@@ -219,7 +219,7 @@ def update():
 	if update_exists == False:
 		print "No Update File Found."
 		time.sleep(2)
-		create_updater():
+		create_updater()
 	else:
 		clear()
 	print "Double checking..."
