@@ -25,7 +25,7 @@ def casual():
 			usr_in = str(usr_in)
 			usr_in.lower
 			
-			elif (usr_in == "1") or (usr_in == "desktop"):
+			if (usr_in == "1") or (usr_in == "desktop"):
 				os.system('startx')
 			
 			elif (usr_in == "2") or (usr_in == "programs"):
