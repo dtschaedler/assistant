@@ -3,6 +3,7 @@ import math
 import os
 
 #config_data[0] = u_name
+update_data[0] = "holdvalue"
 
 run = 1
 cfg_exists = os.path.isfile('config.txt')
