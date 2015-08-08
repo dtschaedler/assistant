@@ -33,6 +33,8 @@ def casual():
 				print "Major Add-Ons:"
 				print "[1]KODI"
 				print "[2]EmulationStation"
+				print ""
+				print "[0]Back"
 				usr_in2 = raw_input('>')
 				usr_in2 = str(usr_in2)
 				usr_in2.lower
@@ -40,11 +42,15 @@ def casual():
 					os.system('kodi')
 				if (usr_in2 == 2) or (usr_in2 == "emulationstation"):
 					os.system('emulationstation')
+				if (usr_in2 == 0):
+					clear()
 					
 			elif (usr_in == "3") or (usr_in == "manage programs"):
 				clear()
 				print "[1]Install Packages"
 				print "[2]Update Packages"
+				print ""
+				print "[0]Back"
 				usr_in2 = raw_input('>')
 				usr_in2 = str(usr_in2)
 				usr_in2.lower
@@ -103,6 +109,9 @@ def casual():
 					print ""
 					print "Update Complete!"
 					cont()
+					
+				if (usr_in2 == 0):
+					clear()
 			
 			elif (usr_in == "9") or (usr_in == "settings"):
 				config()
@@ -220,3 +229,4 @@ with open('config.txt', 'r') as file:
 u_name = config_data[0]
 
 casual()
+
