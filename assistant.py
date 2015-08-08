@@ -79,8 +79,6 @@ def casual():
 						ins_retropie()
 					else:
 						clear()
-				elif (usr_in2 == "8") or (usr_in2 == "update me") or (usr_in2 == "update"):
-					update()
 				elif (usr_in2 == "9") or (usr_in2 == "all listed") or (usr_in2 == "all"):
 					akeep = 1
 					num = 0
@@ -113,6 +111,9 @@ def casual():
 				config()
 				with open('config.txt', 'r') as file:
 					config_data = file.readlines()
+			
+			elif (usr_in2 == "8") or (usr_in2 == "update me") or (usr_in2 == "update"):
+				update()
 			#Quit
 			if (usr_in == "0") or (usr_in == "quit"):
 				raise SystemExit
