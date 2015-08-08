@@ -99,7 +99,6 @@ def casual():
 						clear()
 						
 				if (usr_in2 == 2):
-					clear()
 					print "Running apt-get functions..."
 					os.system('sudo apt-get update')
 					os.system('sudo apt-get upgrade -y')
