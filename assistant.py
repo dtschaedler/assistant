@@ -212,7 +212,7 @@ def create_updater():
 	cont()
 	clear()
 
-def update()
+def update():
 	clear()
 	print "Finding update script..."
 	update_exists = os.path.isfile('assistupdate.sh')
