@@ -201,8 +201,19 @@ def launcher(autorun):
 		clear()
 		
 def create_updater():
+	print "Building the Updater file..."
+		with open('assistupdate.sh', 'w') as file:
+		write1 = "#!/bin/sh\n# assistupdate.sh\n# Update the assistant.py file\nrm assistant.py\nwget https://raw.githubusercontent.com/dtschaedler/assistant/master/assistant.py"
+		update_data = ["hold"]
+		update_data[0] = write1
+		file.writelines( update_data )
+	os.system('chmod 755 assistupdate.sh')
+	os.system('cd')
+	print "Updater FIle Generated"
+
+def update():
 	clear()
-	print "Creating the Updater file..."
+	print "Building the update script..."
 	with open('assistupdate.sh', 'w') as file:
 		write1 = "#!/bin/sh\n# assistupdate.sh\n# Update the assistant.py file\nrm assistant.py\nwget https://raw.githubusercontent.com/dtschaedler/assistant/master/assistant.py"
 		update_data = ["hold"]
@@ -211,23 +222,12 @@ def create_updater():
 	os.system('chmod 755 assistupdate.sh')
 	os.system('cd')
 	print "Updater FIle Generated"
-	cont()
-	clear()
-
-def update():
-	clear()
-	print "Finding update script..."
+	print "Double Checking..."
 	update_exists = os.path.isfile('assistupdate.sh')
 	if update_exists == False:
 		print "No Update File Found."
-		time.sleep(2)
 		create_updater()
-	else:
-		clear()
-	print "Double checking..."
-	if update_exists == False:
-		print "Could not find the script. Update will most likely fail."
-		time.sleep(2)
+		print "Built the updater again. Update may fail if not built correctly"
 	print "Running updater"
 	os.system('./assistupdate.sh')
 	print "Update FInished"
