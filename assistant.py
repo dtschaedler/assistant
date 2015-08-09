@@ -94,6 +94,8 @@ def casual():
 						clear()
 						
 						print "Installed " + str(program)
+						print ""
+						ins_retropie()
 						cont()
 						clear()
 					elif (usr_in2 == "0") or (usr_in2 == "back"):
@@ -118,9 +120,6 @@ def casual():
 					print "[2]KODI"
 					print "[3]Epiphany Browser"
 					print ""
-					print "Semi-Manual:"
-					print "[4]EmulationStation"
-					print ""
 					print "[9]All listed"
 					print "[0]Back"
 					usr_in2 = raw_input('>')
@@ -135,8 +134,6 @@ def casual():
 						rm_packages(program[1])
 					elif (usr_in2 == "3") or (usr_in2 == "epiphany browser") or (usr_in2 == "epiphany"):
 						rm_packages(program[2])
-					elif (usr_in2 == "4") or (usr_in2 == "emulationstation"):
-						ins_retropie()
 					elif (usr_in2 == "9") or (usr_in2 == "all listed") or (usr_in2 == "all"):
 						akeep = 1
 						num = 0
