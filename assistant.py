@@ -38,23 +38,24 @@ def casual():
 				usr_in2 = raw_input('>')
 				usr_in2 = str(usr_in2)
 				usr_in2.lower
-				if (usr_in2 == 1) or (usr_in2 == "kodi"):
+				if (usr_in2 == "1") or (usr_in2 == "kodi"):
 					os.system('kodi')
-				if (usr_in2 == 2) or (usr_in2 == "emulationstation"):
+				if (usr_in2 == "2") or (usr_in2 == "emulationstation"):
 					os.system('emulationstation')
-				if (usr_in2 == 0):
+				if (usr_in2 == "0"):
 					clear()
 					
 			elif (usr_in == "3") or (usr_in == "manage programs"):
 				clear()
 				print "[1]Install Packages"
 				print "[2]Update Packages"
+				print "[3]Remove Packages"
 				print ""
 				print "[0]Back"
 				usr_in2 = raw_input('>')
 				usr_in2 = str(usr_in2)
 				usr_in2.lower
-				if (usr_in2 == 1):
+				if (usr_in2 == "1"):
 					clear()
 					print "Automatic Install:"
 					print "[1]SciTE"
@@ -98,7 +99,8 @@ def casual():
 					elif (usr_in2 == "0") or (usr_in2 == "back"):
 						clear()
 						
-				if (usr_in2 == 2):
+				if (usr_in2 == "2"):
+					clear()
 					print "Running apt-get functions..."
 					os.system('sudo apt-get update')
 					os.system('sudo apt-get upgrade -y')
@@ -109,7 +111,51 @@ def casual():
 					print "Update Complete!"
 					cont()
 					
-				if (usr_in2 == 0):
+				if (usr_in2 == "3"):
+					clear()
+					print "Automatic:"
+					print "[1]SciTE"
+					print "[2]KODI"
+					print "[3]Epiphany Browser"
+					print ""
+					print "Semi-Manual:"
+					print "[4]EmulationStation"
+					print ""
+					print "[9]All listed"
+					print "[0]Back"
+					usr_in2 = raw_input('>')
+					usr_in2 = str(usr_in2)
+					usr_in2.lower
+					
+					program = ["scite","kodi","epiphany-browser"]
+					
+					if (usr_in2 == "1") or (usr_in2 == "scite"):
+						rm_packages(program[0])
+					elif (usr_in2 == "2") or (usr_in2 == "kodi"):
+						rm_packages(program[1])
+					elif (usr_in2 == "3") or (usr_in2 == "epiphany browser") or (usr_in2 == "epiphany"):
+						rm_packages(program[2])
+					elif (usr_in2 == "4") or (usr_in2 == "emulationstation"):
+						ins_retropie()
+					elif (usr_in2 == "9") or (usr_in2 == "all listed") or (usr_in2 == "all"):
+						akeep = 1
+						num = 0
+						while akeep == 1:
+							if num == 3:
+								akeep = 0
+							else:
+								clear()
+								packages(program[num])
+							num = num + 1
+						clear()
+						
+						print "Removed " + str(program)
+						cont()
+						clear()
+					elif (usr_in2 == "0") or (usr_in2 == "back"):
+						clear()
+				
+				if (usr_in2 == "0"):
 					clear()
 			
 			elif (usr_in == "9") or (usr_in == "settings"):
@@ -142,13 +188,18 @@ def ins_retropie():
 	print "When prompted, choose Binary Based Installation (the first choice)"
 	print "See the RetroPie Website for more support. http://www.blog.petrockblocg.com/retropie"
 	cont()
-	sudo /home/pi/RetroPie-Setup/retropie_setup.sh
+	os.system('sudo /home/pi/RetroPie-Setup/retropie_setup.sh')
 	clear()
 
 def packages(program):
 	print "Installing :" + str(program)
 	os.system('sudo apt-get install -y ' +program)
 	print "Installed " + str(program)
+	
+def rm_packages(program):
+	print "Removing :" + str(program)
+	os.system('sudo apt-get remove -y ' + program)
+	print "Removed " + str(program)
 
 def config():
 	clear()
