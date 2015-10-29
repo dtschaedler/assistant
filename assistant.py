@@ -123,19 +123,10 @@ def casual():
 					
 					#Fuck this part where I build a new wpa_supplicant.conf from scratch.
 					print "Adding a PEAP network to wpa_supplicant..."
-					f = open('wpa_supplicant.conf', 'w')
-					f.write("ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\n")
-					f.write("update_config=1\n")
-					f.write("\n")
-					f.write("network={\n\n")
-					f.write("	ssid=\"UCONN_SECURE\"\n")
-					f.write("	key_mgmt=WPA-EAP\n")
-					f.write("	eap=PEAP\n")
-					f.write("	identity=\"\"")
-					f.write("	password=\"\"")
-					f.wrtie("\n")
-					f.write("}")
-					f.close
+					with open('wpa_supplicant.conf', 'w') as file
+					write = "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\nupdate_config=1\n\nnetwork={\n\n	ssid=\"\"\n	key_mgmt=WPA-EAP\n	eap=PEAP\n	identity=\"\"\n	password=\"\"\n\n}")
+					write_data[0] = write
+					file.writelines( write_data )
 					
 					#hopefully copy things properly
 					os.system("sudo cp -f wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant.conf")
