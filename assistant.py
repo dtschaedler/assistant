@@ -49,12 +49,13 @@ def casual():
 				clear()
 				print "[1]Install Packages"
 				print "[2]Update Packages"
-				print "[3]Remove Packages"
+				print "[3]Setup Touchscreen"
 				print ""
 				print "[0]Back"
 				usr_in2 = raw_input('>')
 				usr_in2 = str(usr_in2)
 				usr_in2.lower
+				
 				if (usr_in2 == "1"):
 					clear()
 					print "Automatic Install:"
@@ -67,21 +68,21 @@ def casual():
 					print ""
 					print "[9]All listed"
 					print "[0]Back"
-					usr_in2 = raw_input('>')
-					usr_in2 = str(usr_in2)
-					usr_in2.lower
+					usr_in3 = raw_input('>')
+					usr_in3 = str(usr_in3)
+					usr_in3.lower
 					
 					program = ["scite","kodi","epiphany-browser"]
 					
-					if (usr_in2 == "1") or (usr_in2 == "scite"):
+					if (usr_in3 == "1") or (usr_in3 == "scite"):
 						packages(program[0])
-					elif (usr_in2 == "2") or (usr_in2 == "kodi"):
+					elif (usr_in3 == "2") or (usr_in3 == "kodi"):
 						packages(program[1])
-					elif (usr_in2 == "3") or (usr_in2 == "epiphany browser") or (usr_in2 == "epiphany"):
+					elif (usr_in3 == "3") or (usr_in3 == "epiphany browser") or (usr_in3 == "epiphany"):
 						packages(program[2])
-					elif (usr_in2 == "4") or (usr_in2 == "emulationstation"):
+					elif (usr_in3 == "4") or (usr_in3 == "emulationstation"):
 						ins_retropie()
-					elif (usr_in2 == "9") or (usr_in2 == "all listed") or (usr_in2 == "all"):
+					elif (usr_in3 == "9") or (usr_in3 == "all listed") or (usr_in3 == "all"):
 						akeep = 1
 						num = 0
 						while akeep == 1:
@@ -94,16 +95,15 @@ def casual():
 						clear()
 						
 						print "Installed " + str(program)
-						print ""
-						ins_retropie()
 						cont()
 						clear()
-					elif (usr_in2 == "0") or (usr_in2 == "back"):
+					elif (usr_in3 == "0") or (usr_in3 == "back"):
 						clear()
 						
-				if (usr_in2 == "2"):
+				elif (usr_in2 == "2"):
 					clear()
 					print "Running apt-get functions..."
+					cont()
 					os.system('sudo apt-get update')
 					os.system('sudo apt-get upgrade -y')
 					os.system('sudo apt-get dist-upgrade -y')
@@ -113,46 +113,42 @@ def casual():
 					print "Update Complete!"
 					cont()
 					
-				if (usr_in2 == "3"):
+				elif (usr_in2 == "3"):
 					clear()
-					print "Automatic:"
-					print "[1]SciTE"
-					print "[2]KODI"
-					print "[3]Epiphany Browser"
+					print "Getting the WiFi GUI..."
+					os.system('sudo apt-get update')
+					os.system('sudo apt-get install -y wpagui')
+					print "Copying wpa_gui to desktop..."
+					os.system('sudo cp /usr/sbin/wpa_gui /home/pi/Desktop')
+					
+					#Fuck this part where I build a new wpa_supplicant.conf from scratch.
+					print "Adding a PEAP network to wpa_supplicant..."
+					wifi = open('wpa_supplicant.conf', 'w')
+					wifi.write("ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev\n")
+					wifi.write("update_config=1\n")
+					wifi.write("\n")
+					wifi.write("network={\n\n")
+					wifi.write("	ssid=\"UCONN_SECURE\"\n")
+					wifi.write("	key_mgmt=WPA-EAP\n")
+					wifi.write("	eap=PEAP\n")
+					wifi.write("	identity=\"\"")
+					wifi.write("	password=\"\"")
+					wifi.wrtie("\n")
+					wifi.write("}")
+					wifi.close
+					
+					#hopefully copy things properly
+					os.system("sudo cp -f wpa_supplicant.conf /etc/wpa_supplicant/wpa_supplicant.conf")
+					
+					print "When the screen appears, press enter twice, select terminus, and press enter until you are back at command line"
+					cont()
+					print 
 					print ""
-					print "[9]All listed"
-					print "[0]Back"
-					usr_in2 = raw_input('>')
-					usr_in2 = str(usr_in2)
-					usr_in2.lower
-					
-					program = ["scite","kodi","epiphany-browser"]
-					
-					if (usr_in2 == "1") or (usr_in2 == "scite"):
-						rm_packages(program[0])
-					elif (usr_in2 == "2") or (usr_in2 == "kodi"):
-						rm_packages(program[1])
-					elif (usr_in2 == "3") or (usr_in2 == "epiphany browser") or (usr_in2 == "epiphany"):
-						rm_packages(program[2])
-					elif (usr_in2 == "9") or (usr_in2 == "all listed") or (usr_in2 == "all"):
-						akeep = 1
-						num = 0
-						while akeep == 1:
-							if num == 3:
-								akeep = 0
-							else:
-								clear()
-								packages(program[num])
-							num = num + 1
-						clear()
-						
-						print "Removed " + str(program)
-						cont()
-						clear()
-					elif (usr_in2 == "0") or (usr_in2 == "back"):
-						clear()
+					print ""
+					print "Setup Complete"
+					cont()
 				
-				if (usr_in2 == "0"):
+				else:
 					clear()
 			
 			elif (usr_in == "9") or (usr_in == "settings"):
@@ -185,18 +181,13 @@ def ins_retropie():
 	print "When prompted, choose Binary Based Installation (the first choice)"
 	print "See the RetroPie Website for more support. http://www.blog.petrockblocg.com/retropie"
 	cont()
-	os.system('sudo /home/pi/RetroPie-Setup/retropie_setup.sh')
+	sudo /home/pi/RetroPie-Setup/retropie_setup.sh
 	clear()
 
 def packages(program):
 	print "Installing :" + str(program)
 	os.system('sudo apt-get install -y ' +program)
 	print "Installed " + str(program)
-	
-def rm_packages(program):
-	print "Removing :" + str(program)
-	os.system('sudo apt-get remove -y ' + program)
-	print "Removed " + str(program)
 
 def config():
 	clear()
